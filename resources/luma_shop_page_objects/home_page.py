@@ -14,8 +14,8 @@ class LumaHomePage(Base):
 
     @allure.step('Click on "Create an Account" button')
     def click_create_account_button(self):
-        self.helper.find_element(By.XPATH, self._CREATE_ACCOUNT_BUTTON_XPATH).click()
+        self.helper.wait_for_element(By.XPATH, self._CREATE_ACCOUNT_BUTTON_XPATH).click()
 
     @allure.step('Click on "Create an Account" button')
     def click_sign_in_button(self):
-        self.helper.find_element(By.XPATH, self._SIGN_IN_BUTTON_XPATH).click()
+        self.helper.wait_for_element(By.XPATH, self._SIGN_IN_BUTTON_XPATH).click()
