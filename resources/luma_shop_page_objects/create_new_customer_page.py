@@ -17,6 +17,12 @@ class LumaNewCustomerPage(Base):
 
         self._CREATE_ACCOUNT_BUTTON = "//button[@type='submit' and .//span[text()='Create an Account']]"
 
+        self._FIRST_NAME_ERROR_XPATH = '//*[@id="firstname-error"]'
+        self._LAST_NAME_ERROR_XPATH = '//*[@id="lastname-error"]'
+        self._EMAIL_ERROR_XPATH = '//*[@id="email_address-error"]'
+        self._PASSWORD_ERROR_XPATH = '//*[@id="password-error"]'
+        self._PASSWORD_CONFIRM_ERROR_XPATH = '//*[@id="password-confirmation-error"]'
+
     @allure.step('Fill first name field')
     def _fill_first_name_field(self, text_to_write: str):
         self.helper.find_element(By.XPATH, self._FIRST_NAME_FIELD_XPATH).send_keys(text_to_write)
@@ -49,3 +55,19 @@ class LumaNewCustomerPage(Base):
         self._fill_password_field(password)
         self._fill_password_confirm_field(password_confirm)
         self._click_create_account_button()
+
+    @allure.step("Check error in field")
+    def check_error_in_field(self, field: str):
+        match field:
+            case "first_name":
+                assert self.helper.wait_for_element(By.XPATH, self._FIRST_NAME_ERROR_XPATH)
+            case "last_name":
+                assert self.helper.wait_for_element(By.XPATH, self._LAST_NAME_ERROR_XPATH)
+            case "email":
+                assert self.helper.wait_for_element(By.XPATH, self._EMAIL_ERROR_XPATH)
+            case "password":
+                assert self.helper.wait_for_element(By.XPATH, self._PASSWORD_ERROR_XPATH)
+            case "confirm_password":
+                assert self.helper.wait_for_element(By.XPATH, self._PASSWORD_CONFIRM_ERROR_XPATH)
+            case _:
+                self.loger.warning("There is no passed field to the method. Nothing was checked.")
