@@ -1,0 +1,1 @@
+allure generate report_raw -o report_html --clean
