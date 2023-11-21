@@ -1,0 +1,1 @@
+allure open report_html --port 9999
