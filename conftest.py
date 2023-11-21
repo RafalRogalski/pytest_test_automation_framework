@@ -1,5 +1,3 @@
-import time
-
 import allure
 import pytest
 from allure_commons.types import AttachmentType
@@ -29,6 +27,7 @@ def logout_user_from_luma_shop_after_test():
     yield
     base.driver.get("https://magento.softwaretestingboard.com/customer/account/logout/")
 
+
 @pytest.fixture(name="Logout user from luma shop before test")
 def logout_user_from_luma_shop_before_test():
     base.driver.get("https://magento.softwaretestingboard.com/customer/account/logout/")
@@ -38,3 +37,20 @@ def logout_user_from_luma_shop_before_test():
 def session_setup():
     yield
     base.driver.close()
+
+
+def pytest_addoption(parser):
+    parser.addoption("--capture_screenshots", action="store", default="False", help="Options: True or False")
+
+
+def get_allow_screenshot_flag(terminal_flag):
+    if terminal_flag == "True" or terminal_flag == "true":
+        return True
+    else:
+        return False
+
+
+@pytest.fixture(scope="session", name="Screenshot flag set", autouse=True)
+def screenshot_flag_fixture(request):
+    my_variable = request.config.getoption("--capture_screenshots")
+    Variables.ATTACH_SCREENSHOTS = get_allow_screenshot_flag(my_variable)
