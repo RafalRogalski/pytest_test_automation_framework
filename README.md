@@ -10,21 +10,22 @@ Install Python, PyCharm and needed libraries
   installation by selecting appropriate checkbox.
 * [PyCharm](https://www.jetbrains.com/pycharm/download/#section=windows) - please download Community Edition and after
   installation choose “Virtual Environment” as environment type when you open a project for the first time.
-* [Allure framework](https://docs.qameta.io/allure) - please download allure-framework and install it. As for manual
-  installation we can find infromation [here](https://docs.qameta.io/allure/#_manual_installation)
+* [Allure framework](https://allurereport.org/docs/) - please download allure-framework and install it. As for manual
+  installation we can find infromation [here](https://allurereport.org/docs/gettingstarted-installation/)
 * Install pytest Framework and dependencies from ```requirements.txt``` file by
   typing ```pip install -r requirements.txt``` from PyCharm terminal level.
 
 ## Running Pytest Framework tests
-Run pytest command for example:  ```pytest --reruns 5 --alluredir=report/report_raw```
+Run pytest command for example:  ```pytest --alluredir=report/report_raw```
 
 It is important to know that all file paths (both for resource files and test data) are relative to place from which
 test was invoked. Entire solution is prepared for test invocation from main catalogue.
 
 ## Pytest command arguments examples
 
-```pytest tests/01_login_test.py --allure-severities normal,critical --alluredir=report/report_raw --capture_screenshots=True```
+```pytest -n 5 tests/01_basic_function_for_luma_test.py --allure-severities blocker,critical --alluredir=report/report_raw --capture_screenshots=True```
 
+* ```-n 5``` - Allows to run tests in parallel mode using 5 processes
 * ```--alluredir=report/report_raw``` - Specifies to which raw files folder results will be stored (json files,
   screenshots etc.)
 * ```pytest tests/01_login_test.py``` - Runs specific test file in project, without file pytest will run every test in
@@ -46,9 +47,13 @@ of report we need to use command:
 * ```-o report/report_html``` - Specifies where generated html report will be stored
 * ```--clean``` - Cleans report destination folder which is leading to clear run history
 
+Also we can use `.bat` file to generate report:
+
+```report/generate_new_report.bat```
+
 ## Allure report browse
 
-To see html version of allure report we can use .bat file which starts local server.
+To see html version of allure report we can use `.bat` file which starts local server.
 
 ```report/run_allure_server.bat``` 
 
