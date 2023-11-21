@@ -14,7 +14,7 @@ class DriverFactory:
     def _driver_generator():
         if not DriverFactory._driver:
             options = webdriver.ChromeOptions()
-            options.add_argument('--window-size=1600,1000')
+            options.add_argument('--window-size=1600,1300')
             options.add_argument('--incognito')
             options.add_argument("--headless")
 
